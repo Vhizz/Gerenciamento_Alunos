@@ -7,11 +7,10 @@ public class Aluno {
 	private int idade;
 	
 	
-	public Aluno(String nome, int idade, String curso, String matricula) {
+	public Aluno(String nome, int idade, String curso) {
 		this.nome = nome;
 		this.idade = idade;
 		this.curso = curso;
-		this.matricula = matricula;
 	}
 	
 	@Override
@@ -19,7 +18,6 @@ public class Aluno {
 		return "Aluno{" +
 				"nome='" + nome + '\'' +
 				", idade=" + idade + 
-				", matricula='" + matricula + '\'' +
 				", curso='" + curso + '\'' +
 				'}';
 	}

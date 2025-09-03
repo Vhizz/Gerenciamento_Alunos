@@ -52,8 +52,8 @@ public class MainAPP {
             	System.out.println("Matricula: ");
             	matricula = sc.nextLine();
             	
-            	Aluno novoAluno = new Aluno(nome, idade, curso, matricula);
-            	alunoService.adicionarAluno(novoAluno);
+            	Aluno novoAluno = new Aluno(nome, idade, curso);
+            	alunoService.adicionarAluno(matricula, novoAluno);
             	
             	break;
             	
