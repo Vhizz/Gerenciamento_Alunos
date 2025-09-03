@@ -52,7 +52,7 @@ public class MainAPP {
             	System.out.println("Matricula: ");
             	matricula = sc.nextLine();
             	
-            	Aluno novoAluno = new Aluno(nome, idade, curso);
+            	Aluno novoAluno = new Aluno(nome, idade, curso, matricula);
             	alunoService.adicionarAluno(matricula, novoAluno);
             	
             	break;

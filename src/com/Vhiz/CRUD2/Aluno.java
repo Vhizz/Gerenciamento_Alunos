@@ -7,10 +7,11 @@ public class Aluno {
 	private int idade;
 	
 	
-	public Aluno(String nome, int idade, String curso) {
+	public Aluno(String nome, int idade, String curso, String matricula) {
 		this.nome = nome;
 		this.idade = idade;
 		this.curso = curso;
+		this.matricula = matricula;
 	}
 	
 	@Override
@@ -18,12 +19,11 @@ public class Aluno {
 		return "Aluno{" +
 				"nome='" + nome + '\'' +
 				", idade=" + idade + 
+				", matricula'" + matricula + '\'' +
 				", curso='" + curso + '\'' +
 				'}';
 	}
-	
 
-	
 	
 	@Override
 	public int hashCode() {
@@ -66,6 +66,4 @@ public class Aluno {
 	public void setIdade(int idade) {
 		this.idade = idade;
 	}
-	
-	
 }
