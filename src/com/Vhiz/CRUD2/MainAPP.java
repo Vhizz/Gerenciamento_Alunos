@@ -7,7 +7,7 @@ public class MainAPP {
 		Scanner sc = new Scanner(System.in);
 		AlunoService alunoService = new AlunoService();
 		int opcao = -1, idade = 0;
-		String matBusca, curso = null, matricula = null, nome;
+		String matBusca, curso, matricula, nome;
 		
 		
 		do {
@@ -21,7 +21,6 @@ public class MainAPP {
             System.out.print("Escolha uma opção: ");
             
             
-            
             try {
             opcao = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
@@ -31,43 +30,37 @@ public class MainAPP {
             
             //Adiciona alunos à lista
             case 1:
-            	do {
-            	System.out.println("Nome: ");
-            	nome = sc.nextLine();
-            	nome = nome.replaceAll("\\s", "");
-            	if (nome.isEmpty())
-            		System.out.println("O nome está vazio! Insira um nome válido!");
-            	} while (nome.isEmpty());
+
+            	//Adiciona o nome ao Aluno.
+            	System.out.println("Insira o nome do Aluno: ");
+            	nome = Validador.CheckAndAdd(sc);
+            	System.out.println("Nome adicionado com sucesso!");
+            	System.out.println("----------------------------");
             	
             	
-            	System.out.println("Idade: ");
-            	System.out.println("ATENÇÃO: Idade mínima para prestação de nossos cursos de 18 Anos!");
-            	
+            	//Adiciona a idade ao Aluno.
             	try {
-            	idade = Validador.adicionarIdadeAluno(sc);
+            	idade = Validador.addIdadeAluno(sc);
             	} catch (IdadeException e) {
             		System.out.println(e.getMessage());
             		break;
             	}
+            	System.out.println("----------------------------");
             	
             	
-            	do {
-            	System.out.println("Curso: ");
-            	curso = sc.nextLine();
-            	curso = curso.replaceAll("\\s", "");
-            	if (curso.isEmpty())
-            		System.out.println("O curso está vazio! Insira um curso válido!");
-            	} while (curso.isEmpty());
+            	//Adiciona o curso ao Aluno.
+            	System.out.println("Insira o nome do Curso:");
+            	curso = Validador.CheckAndAdd(sc);
+            	System.out.println("Curso adicionado com sucesso!");
+            	System.out.println("-----------------------------");
+            	
+            	//Cadastra a matricula ao aluno.
+            	matricula = Validador.checaMatricula(sc);
+            	System.out.println("Matricula cadastrada com sucesso!");
+            	System.out.println("---------------------------------");
             	
             	
-            	do {
-            	System.out.println("Matricula: ");
-            	matricula = sc.nextLine();
-            	matricula = matricula.replaceAll("\\s", "");
-            	if (matricula.isEmpty())
-            		System.out.println("A matricula está vazia! Insira uma matricula válida!");
-            	} while (matricula.isEmpty());
-            	
+            	//Adiciona os dados passados ao usuário e cria o objeto aluno.
             	Aluno novoAluno = new Aluno(nome, idade, curso, matricula);
             	alunoService.adicionarAluno(matricula, novoAluno);
             	
@@ -80,35 +73,37 @@ public class MainAPP {
             	
             //Busca aluno por matrícula e exibe o resultado.
             case 3:
-            	System.out.println("Digite a matricula: ");
-            	matBusca = sc.nextLine();
+            	System.out.println("Digite o número de matricula: ");
+            	matBusca = Validador.checaMatricula(sc);
             	alunoService.buscarPorMatricula(matBusca)
             		.ifPresentOrElse(
             				System.out::println,
-            				() -> System.out.println("Aluno não encontrado")
+            				() -> System.out.println("Aluno não encontrado!")
             				);
             	break;
             
             //Atualiza o aluno da matricula escolhida.
             case 4:
             	System.out.println("Digite a Matricula do aluno a atualizar: ");
-            	matBusca = sc.nextLine();
+            	matBusca = Validador.checaMatricula(sc);
+            	
             	
             	System.out.println("ATENÇÃO: Em caso de não alteração, preencha com os mesmos dados de anteriormente...");
-            	System.out.println();
             	System.out.println("Digite o novo nome do aluno: ");
-            	nome = sc.nextLine();
+            	nome = Validador.CheckAndAdd(sc);
+            	
             	
             	System.out.println("Digite a nova idade do aluno: ");
             	try {
-                	idade = Validador.adicionarIdadeAluno(sc);
+                	idade = Validador.addIdadeAluno(sc);
                 	} catch (IdadeException e) {
                 		System.out.println(e.getMessage());
                 		break;
                 	}
             	
+            	
             	System.out.println("Digite o novo curso do aluno: ");
-            	curso = sc.nextLine();
+            	curso = Validador.CheckAndAdd(sc);
             	
             	alunoService.atualizarAluno(matBusca, nome, idade, curso);
             	System.out.println(alunoService.buscarPorMatricula(matBusca));
@@ -117,7 +112,7 @@ public class MainAPP {
             //Exclui o aluno através do numero de matricula passado.
             case 5:
             	System.out.println("Digite a Matricula do aluno a ser deletado:");
-            	matBusca = sc.nextLine();
+            	matBusca = Validador.checaMatricula(sc);
             	alunoService.removerAluno(matBusca);
             	break;
             	
